@@ -1,10 +1,10 @@
 package ru.sbt.mipt.oop;
 
-public class CommandSensor {
-    private final CommandType type;
+public class SensorCommand {
+    private final SensorCommandType type;
     private final String objectId;
 
-    public CommandSensor(CommandType type, String objectId) {
+    public SensorCommand(SensorCommandType type, String objectId) {
         this.type = type;
         this.objectId = objectId;
     }

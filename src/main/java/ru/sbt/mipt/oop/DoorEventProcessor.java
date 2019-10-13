@@ -1,10 +1,10 @@
 package ru.sbt.mipt.oop;
 
-import static ru.sbt.mipt.oop.EventType.DOOR_CLOSED;
-import static ru.sbt.mipt.oop.EventType.DOOR_OPEN;
+import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
+import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 
 public class DoorEventProcessor {
-    public static void processEvent(SmartHome smartHome, EventSensor event) {
+    public static void processEvent(SmartHome smartHome, SensorEvent event) {
         if (!isDoorEvent(event)) {
             return;
         }
@@ -23,7 +23,7 @@ public class DoorEventProcessor {
         }
     }
 
-    private static boolean isDoorEvent(EventSensor event) {
+    private static boolean isDoorEvent(SensorEvent event) {
         return event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED;
     }
 }

@@ -1,10 +1,10 @@
 package ru.sbt.mipt.oop;
 
-import static ru.sbt.mipt.oop.EventType.LIGHT_OFF;
-import static ru.sbt.mipt.oop.EventType.LIGHT_ON;
+import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
+import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 
 public class LightEventProcessor {
-    public static void processEvent(SmartHome smartHome, EventSensor event) {
+    public static void processEvent(SmartHome smartHome, SensorEvent event) {
         if (!isLightEvent(event)) {
             return;
         }
@@ -24,7 +24,7 @@ public class LightEventProcessor {
         }
     }
 
-    private static boolean isLightEvent(EventSensor event) {
+    private static boolean isLightEvent(SensorEvent event) {
         return event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF;
     }
 }
