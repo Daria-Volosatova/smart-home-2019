@@ -20,4 +20,12 @@ public class Light {
     public void setOn(boolean on) {
         isOn = on;
     }
+
+    public void turnOn() {
+        setOn(true);
+    }
+
+    public void turnOff() {
+        setOn(false);
+    }
 }
