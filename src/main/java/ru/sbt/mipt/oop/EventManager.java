@@ -13,6 +13,7 @@ class EventManager {
             if ((type == LIGHT_ON) | (type == LIGHT_OFF)) {
                 LightEventProcessor.processEvent(smartHome, event);
             } else if ((type == DOOR_OPEN) | (type == DOOR_CLOSED)) {
+                HallDoorEventProcessor.processEvent(smartHome, event);
                 DoorEventProcessor.processEvent(smartHome, event);
             }
         }
