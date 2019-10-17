@@ -24,4 +24,8 @@ public class Door {
     public void close() {
         setOpen(false);
     }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
 }
