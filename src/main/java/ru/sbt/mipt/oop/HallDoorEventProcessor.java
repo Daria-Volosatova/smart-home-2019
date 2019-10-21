@@ -1,7 +1,15 @@
 package ru.sbt.mipt.oop;
 
 public class HallDoorEventProcessor {
-    public static void processEvent(SmartHome smartHome, SensorEvent event) {
+    private static SensorEvent event;
+    private static SmartHome smartHome;
+
+    public HallDoorEventProcessor(SmartHome smartHome, SensorEvent event) {
+        this.event = event;
+        this.smartHome = smartHome;
+    }
+
+    public static void processEvent() {
         if (!isDoorClosedEvent(event)) {
             return;
         }

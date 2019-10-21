@@ -12,7 +12,6 @@ class HallDoorEventProcessorTest {
 
     @Test
     void processEventAllLightOff() {
-        HallDoorEventProcessor hallDoorEventProcessor = new HallDoorEventProcessor();
         SmartHome home =new SmartHome();
         String doorId1 = "125";
         Door door1 = new Door(true, doorId1);
@@ -24,8 +23,8 @@ class HallDoorEventProcessorTest {
         home.addRoom(new Room(Arrays.asList(light2),  Collections.emptyList(), "room2"));
 
         SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_CLOSED, doorId1);
-        HallDoorEventProcessor.processEvent(home, event1);
-        DoorEventProcessor.processEvent(home, event1);
+        HallDoorEventProcessor hallDoorEventProcessor = new HallDoorEventProcessor(home, event1);
+        hallDoorEventProcessor.processEvent();
         Assert.assertTrue(!light1.isOn());
         Assert.assertTrue(!light2.isOn());
         Assert.assertTrue(!door1.isOpen());
@@ -33,7 +32,6 @@ class HallDoorEventProcessorTest {
 
     @Test
     void processEventLightOffWhenDoorOpening() {
-        HallDoorEventProcessor hallDoorEventProcessor = new HallDoorEventProcessor();
         SmartHome home =new SmartHome();
         String doorId1 = "125";
         Door door1 = new Door(false, doorId1);
@@ -45,8 +43,8 @@ class HallDoorEventProcessorTest {
         home.addRoom(new Room(Arrays.asList(light2),  Collections.emptyList(), "room2"));
 
         SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_OPEN, doorId1);
-        HallDoorEventProcessor.processEvent(home, event1);
-        DoorEventProcessor.processEvent(home, event1);
+        HallDoorEventProcessor hallDoorEventProcessor1 = new HallDoorEventProcessor(home, event1);
+        hallDoorEventProcessor1.processEvent();
         Assert.assertTrue(!light1.isOn());
         Assert.assertTrue(!light2.isOn());
         Assert.assertTrue(door1.isOpen());

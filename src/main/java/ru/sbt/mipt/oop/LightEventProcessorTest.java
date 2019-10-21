@@ -12,7 +12,6 @@ class LightEventProcessorTest {
 
     @Test
     void processEventCorrectLightOn() {
-        LightEventProcessor lightEventProcessor = new LightEventProcessor();
         SmartHome home =new SmartHome();
         String lightId1 = "125";
         Light light1 = new Light(lightId1, false);
@@ -23,15 +22,16 @@ class LightEventProcessorTest {
 
         SensorEvent event1 = new SensorEvent(SensorEventType.LIGHT_ON, lightId1);
         SensorEvent event2 = new SensorEvent(SensorEventType.LIGHT_ON, lightId2);
-        lightEventProcessor.processEvent(home, event1);
-        lightEventProcessor.processEvent(home, event2);
+        LightEventProcessor lightEventProcessor1 = new LightEventProcessor(home, event1);
+        LightEventProcessor lightEventProcessor2 = new LightEventProcessor(home, event2);
+        lightEventProcessor1.processEvent();
+        lightEventProcessor2.processEvent();
         Assert.assertTrue(light1.isOn());
         Assert.assertTrue(light2.isOn());
     }
 
     @Test
     void processEventCorrectLightOff() {
-        LightEventProcessor lightEventProcessor = new LightEventProcessor();
         SmartHome home =new SmartHome();
         String lightId1 = "125";
         Light light1 = new Light(lightId1, false);
@@ -42,8 +42,10 @@ class LightEventProcessorTest {
 
         SensorEvent event1 = new SensorEvent(SensorEventType.LIGHT_OFF, lightId1);
         SensorEvent event2 = new SensorEvent(SensorEventType.LIGHT_OFF, lightId2);
-        lightEventProcessor.processEvent(home, event1);
-        lightEventProcessor.processEvent(home, event2);
+        LightEventProcessor lightEventProcessor1 = new LightEventProcessor(home, event1);
+        LightEventProcessor lightEventProcessor2 = new LightEventProcessor(home, event2);
+        lightEventProcessor1.processEvent();
+        lightEventProcessor2.processEvent();
         Assert.assertTrue(!light1.isOn());
         Assert.assertTrue(!light2.isOn());
     }
