@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.objects.SmartHome;
+
 import java.io.IOException;
 
 public class Application {
