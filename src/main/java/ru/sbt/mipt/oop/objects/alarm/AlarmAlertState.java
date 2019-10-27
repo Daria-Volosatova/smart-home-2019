@@ -10,6 +10,10 @@ public class AlarmAlertState implements AlarmState {
         this.code = code;
     }
 
+    public AlarmAlertState(Alarm alarm) {
+        this.alarm = alarm;
+    }
+
     @Override
     public void activate(String enteredCode) {
         System.out.println("Alarm is already activated, alert is turned on!");
