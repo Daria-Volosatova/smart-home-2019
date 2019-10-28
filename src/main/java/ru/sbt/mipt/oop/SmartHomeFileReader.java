@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class SmartHomeFileReader {
+public class SmartHomeFileReader implements FileReader {
     static SmartHome read() throws IOException {
         // считываем состояние дома из файла
         Gson gson = new Gson();

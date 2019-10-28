@@ -3,7 +3,7 @@ package ru.sbt.mipt.oop;
 import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
 import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 
-public class LightEventProcessor {
+public class LightEventProcessor implements EventProcessor{
     public static void processEvent(SmartHome smartHome, SensorEvent event) {
         if (!isLightEvent(event)) {
             return;

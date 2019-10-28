@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop;
 
-public class HallDoorEventProcessor {
+public class HallDoorEventProcessor implements EventProcessor{
     public static void processEvent(SmartHome smartHome, SensorEvent event) {
         if (!isDoorClosedEvent(event)) {
             return;

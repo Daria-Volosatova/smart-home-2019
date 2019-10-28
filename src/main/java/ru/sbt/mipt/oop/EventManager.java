@@ -1,25 +1,15 @@
 package ru.sbt.mipt.oop;
 
-import static ru.sbt.mipt.oop.SensorEvent.getNextSensorEvent;
-import static ru.sbt.mipt.oop.SensorEventType.*;
 
 class EventManager {
-    static void manage(SmartHome smartHome) {
-        for (SensorEvent event = getNextSensorEvent();
+    static void manageSmartHome(SmartHome smartHome) {
+        for (SensorEvent event = NextSensorEvent.getNextSensorEvent();
              event != null;
-             event = getNextSensorEvent()) {
+             event = NextSensorEvent.getNextSensorEvent()) {
             System.out.println("Got event: " + event);
-            SensorEventType type = event.getType();
-            if ((type == LIGHT_ON) | (type == LIGHT_OFF)) {
-                LightEventProcessor.processEvent(smartHome, event);
-            } else if ((type == DOOR_OPEN) | (type == DOOR_CLOSED)) {
-                HallDoorEventProcessor.processEvent(smartHome, event);
-                DoorEventProcessor.processEvent(smartHome, event);
-            }
+            EventProcessor.processEvent(smartHome, event);
+            SensorCommand command = new SensorCommand(SensorCommandType.LIGHT_OFF, Light.getId());
+            MessageManager.sendCommand(command);
         }
-    }
-
-    private static void sendCommand(SensorCommand command) {
-        System.out.println("Pretend we're sending command " + command);
     }
 }

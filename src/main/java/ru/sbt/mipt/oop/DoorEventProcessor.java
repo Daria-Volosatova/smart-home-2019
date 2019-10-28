@@ -3,7 +3,7 @@ package ru.sbt.mipt.oop;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 
-public class DoorEventProcessor {
+public class DoorEventProcessor implements EventProcessor {
     public static void processEvent(SmartHome smartHome, SensorEvent event) {
         if (!isDoorEvent(event)) {
             return;
