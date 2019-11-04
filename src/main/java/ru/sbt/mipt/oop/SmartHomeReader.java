@@ -5,11 +5,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class SmartHomeFileReader implements FileReader {
-    static SmartHome read() throws IOException {
+public class SmartHomeReader implements Reader {
+
+    @Override
+    public SmartHome read(){
         // считываем состояние дома из файла
         Gson gson = new Gson();
-        String json = new String(Files.readAllBytes(Paths.get("smart-home-1.js")));
+        String json = null;
+        try {
+            json = new String(Files.readAllBytes(Paths.get("smart-home-1.js")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return gson.fromJson(json, SmartHome.class);
     }
 }

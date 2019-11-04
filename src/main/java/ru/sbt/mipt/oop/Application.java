@@ -6,7 +6,7 @@ public class Application {
 
     public static void main(String... args) throws IOException {
         // считываем состояние дома из файла
-        SmartHome smartHome = SmartHomeFileReader.read();
+        SmartHome smartHome = SmartHomeReader.read();
         EventManager.manageSmartHome(smartHome);
     }
 }
