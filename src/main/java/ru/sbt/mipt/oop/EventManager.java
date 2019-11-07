@@ -7,9 +7,8 @@ class EventManager {
              event != null;
              event = NextSensorEvent.getNextSensorEvent()) {
             System.out.println("Got event: " + event);
-            EventProcessor.processEvent(smartHome, event);
-            SensorCommand command = new SensorCommand(SensorCommandType.LIGHT_OFF, Light.getId());
-            MessageManager.sendCommand(command);
+            LightEventProcessor.processEvent(smartHome, event);
+            DoorEventProcessor.processEvent(smartHome, event);
         }
     }
 }

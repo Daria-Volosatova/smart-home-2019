@@ -8,12 +8,11 @@ import java.nio.file.Paths;
 public class SmartHomeReader implements Reader {
 
     @Override
-    public SmartHome read(){
-        // считываем состояние дома из файла
+    public SmartHome read(String path) {
         Gson gson = new Gson();
         String json = null;
         try {
-            json = new String(Files.readAllBytes(Paths.get("smart-home-1.js")));
+            json = new String(Files.readAllBytes(Paths.get(path)));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,7 +2,7 @@ package ru.sbt.mipt.oop;
 
 public class Light {
     private boolean isOn;
-    private static String id;
+    private String id;
 
     public Light(String id, boolean isOn) {
         this.id = id;
@@ -13,7 +13,7 @@ public class Light {
         return isOn;
     }
 
-    public static String getId() {
+    public String getId() {
         return id;
     }
 

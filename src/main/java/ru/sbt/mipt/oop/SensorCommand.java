@@ -9,7 +9,6 @@ public class SensorCommand {
         this.objectId = objectId;
     }
 
-    @Override
     public String toString() {
         return "CommandSensor{" +
                 "type=" + type +
