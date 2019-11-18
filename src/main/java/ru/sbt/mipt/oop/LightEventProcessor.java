@@ -4,7 +4,8 @@ import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
 import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 
 public class LightEventProcessor implements EventProcessor{
-    public static void processEvent(SmartHome smartHome, SensorEvent event) {
+    @Override
+    public void processEvent(SmartHome smartHome, SensorEvent event) {
         if (!isLightEvent(event)) {
             return;
         }

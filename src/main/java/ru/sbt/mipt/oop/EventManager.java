@@ -7,8 +7,12 @@ class EventManager {
              event != null;
              event = NextSensorEvent.getNextSensorEvent()) {
             System.out.println("Got event: " + event);
-            LightEventProcessor.processEvent(smartHome, event);
-            DoorEventProcessor.processEvent(smartHome, event);
+            LightEventProcessor lightEventProcessor = new LightEventProcessor();
+            lightEventProcessor.processEvent(smartHome, event);
+            HallDoorEventProcessor hallDoorEventProcessor = new HallDoorEventProcessor();
+            hallDoorEventProcessor.processEvent(smartHome, event);
+            DoorEventProcessor doorEventProcessor = new DoorEventProcessor();
+            doorEventProcessor.processEvent(smartHome, event);
         }
     }
 }
