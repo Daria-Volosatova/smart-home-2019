@@ -37,4 +37,9 @@ public class AlarmActivatedState implements AlarmState{
             alarm.changeState(newState);
         };
     }
+
+    @Override
+    public void activateAlert() {
+        alarm.getState();
+    }
 }

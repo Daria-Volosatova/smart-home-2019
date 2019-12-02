@@ -35,4 +35,8 @@ public class AlarmAlertState implements AlarmState {
             alarm.changeState(newState);
         }
     }
+
+    @Override
+    public void activateAlert() {
+    }
 }

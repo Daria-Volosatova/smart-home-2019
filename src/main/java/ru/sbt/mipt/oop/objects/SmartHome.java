@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class SmartHome{
+    private static Alarm alarm;
     Collection<Room> rooms;
-    private Alarm alarm;
 
     public SmartHome() {
         rooms = new ArrayList<>();
@@ -27,17 +27,7 @@ public class SmartHome{
         return rooms;
     }
 
-    public void activateAlarm(String code){
-
-        this.alarm.activateAlarm(code);
-    }
-
-    public void deactivateAlarm(String code){
-
-        this.alarm.deactivateAlarm(code);
-    }
-
-    public Alarm getAlarm(){
+    public static Alarm getAlarm(){
         return alarm;
     }
 }

@@ -1,7 +1,5 @@
 package ru.sbt.mipt.oop.objects.alarm;
 
-import ru.sbt.mipt.oop.objects.alarm.AlarmState;
-
 public class Alarm {
     private AlarmState state;
     private static String code;
@@ -18,7 +16,7 @@ public class Alarm {
         code = newCode;
     }
 
-    public static String getCode(){
+    public String getCode(){
         return code;
     }
 

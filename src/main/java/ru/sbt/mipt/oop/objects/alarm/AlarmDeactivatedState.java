@@ -20,4 +20,9 @@ public class AlarmDeactivatedState implements AlarmState {
         System.out.println("Alarm is already deactivated");
     }
 
+    @Override
+    public void activateAlert() {
+        this.alarm.getState();
+    }
+
 }

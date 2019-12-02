@@ -11,12 +11,13 @@ public class AlarmEventProcessor implements EventProcessor {
 
     public void processEvent(SmartHome smartHome, SensorEvent event) {
         if (isAlarmEvent(event)){
+            Alarm alarm = SmartHome.getAlarm();
             if (event.getType() == ALARM_ACTIVATE){
                 String currentCode = Alarm.getCode();
-                smartHome.activateAlarm(currentCode);
+                alarm.activateAlarm(currentCode);
             } else {
                 String currentCode = Alarm.getCode();
-                smartHome.deactivateAlarm(currentCode);
+                alarm.deactivateAlarm(currentCode);
             }
         }
     }
