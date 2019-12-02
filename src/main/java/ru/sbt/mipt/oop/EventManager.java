@@ -3,11 +3,11 @@ package ru.sbt.mipt.oop;
 
 class EventManager {
     static void manageSmartHome(SmartHome smartHome) {
+        LightEventProcessor lightEventProcessor = new LightEventProcessor();
         for (SensorEvent event = NextSensorEvent.getNextSensorEvent();
              event != null;
              event = NextSensorEvent.getNextSensorEvent()) {
             System.out.println("Got event: " + event);
-            LightEventProcessor lightEventProcessor = new LightEventProcessor();
             lightEventProcessor.processEvent(smartHome, event);
             HallDoorEventProcessor hallDoorEventProcessor = new HallDoorEventProcessor();
             hallDoorEventProcessor.processEvent(smartHome, event);
