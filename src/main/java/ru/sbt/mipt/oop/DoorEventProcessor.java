@@ -1,37 +1,34 @@
 package ru.sbt.mipt.oop;
 
-import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
-import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
+import static ru.sbt.mipt.oop.SensorEventType.*;
 
-public class DoorEventProcessor implements EventProcessor{
-    private SensorEvent event;
-    private SmartHome smartHome;
+public class DoorEventProcessor implements EventProcessor{private SmartHome smartHome;
 
-    public DoorEventProcessor(SmartHome smartHome, SensorEvent event) {
-        this.event = event;
-        this.smartHome = smartHome;
+    public DoorEventProcessor(SmartHome smarthome) {
+
+        this.smartHome = smarthome;
     }
 
-    public void processEvent() {
-        if (!isDoorEvent(event)) {
-            return;
-        }
-        for (Room room : smartHome.getRooms()) {
-            for (Door door : room.getDoors()) {
-                if (door.getId().equals(event.getObjectId())) {
-                    if (event.getType() == DOOR_OPEN) {
-                        door.open();
-                        System.out.println("Door " + door.getId() + " in " + room.getName() + " was opened.");
-                    } else {
-                        door.close();
-                        System.out.println("Door " + door.getId() + " in " + room.getName() + " was closed.");
-                    }
+    // событие от источника света
+    @Override
+    public void processEvent(SensorEvent event) {
+        if (!isDoorEvent(event)){return;}
+        // событие от источника света
+        smartHome.execute(actionable -> {
+            Door door = (Door) actionable;
+            if (door.getId().equals(event.getObjectId())) {
+                if (event.getType() == DOOR_CLOSED) {
+                    door.close();
+                    System.out.println("Door " + door.getId() + " was closed.");
+                } else {
+                    door.open();
+                    System.out.println("Door " + door.getId() + " was closed.");
                 }
             }
-        }
+        });
     }
 
-    private static boolean isDoorEvent(SensorEvent event) {
-        return event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED;
+    private boolean isDoorEvent(SensorEvent event) {
+        return (event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED);
     }
 }

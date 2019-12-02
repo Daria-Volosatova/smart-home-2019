@@ -22,10 +22,10 @@ class LightEventProcessorTest {
 
         SensorEvent event1 = new SensorEvent(SensorEventType.LIGHT_ON, lightId1);
         SensorEvent event2 = new SensorEvent(SensorEventType.LIGHT_ON, lightId2);
-        LightEventProcessor lightEventProcessor1 = new LightEventProcessor(home, event1);
-        LightEventProcessor lightEventProcessor2 = new LightEventProcessor(home, event2);
-        lightEventProcessor1.processEvent();
-        lightEventProcessor2.processEvent();
+        LightEventProcessor lightEventProcessor1 = new LightEventProcessor(home);
+        LightEventProcessor lightEventProcessor2 = new LightEventProcessor(home);
+        lightEventProcessor1.processEvent(event1);
+        lightEventProcessor2.processEvent(event2);
         Assert.assertTrue(light1.isOn());
         Assert.assertTrue(light2.isOn());
     }
@@ -42,10 +42,10 @@ class LightEventProcessorTest {
 
         SensorEvent event1 = new SensorEvent(SensorEventType.LIGHT_OFF, lightId1);
         SensorEvent event2 = new SensorEvent(SensorEventType.LIGHT_OFF, lightId2);
-        LightEventProcessor lightEventProcessor1 = new LightEventProcessor(home, event1);
-        LightEventProcessor lightEventProcessor2 = new LightEventProcessor(home, event2);
-        lightEventProcessor1.processEvent();
-        lightEventProcessor2.processEvent();
+        LightEventProcessor lightEventProcessor1 = new LightEventProcessor(home);
+        LightEventProcessor lightEventProcessor2 = new LightEventProcessor(home);
+        lightEventProcessor1.processEvent(event1);
+        lightEventProcessor2.processEvent(event2);
         Assert.assertTrue(!light1.isOn());
         Assert.assertTrue(!light2.isOn());
     }

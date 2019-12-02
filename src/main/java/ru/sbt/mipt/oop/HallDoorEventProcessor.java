@@ -5,8 +5,8 @@ public class HallDoorEventProcessor {
     private static SmartHome smartHome;
 
     public HallDoorEventProcessor(SmartHome smartHome, SensorEvent event) {
-        this.event = event;
-        this.smartHome = smartHome;
+        HallDoorEventProcessor.event = event;
+        HallDoorEventProcessor.smartHome = smartHome;
     }
 
     public static void processEvent() {
@@ -22,6 +22,8 @@ public class HallDoorEventProcessor {
                                 light.setOn(false);
                             }
                         }
+                    } else {
+                        return;
                     }
                     System.out.println("All lights were turned off.");
                 }
