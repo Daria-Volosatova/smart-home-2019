@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -22,6 +23,10 @@ public class SmartHome{
         return rooms;
     }
 
-
+    public void execute(Action action) {
+        for (Room room : rooms) {
+            room.execute(action);
+        }
+    }
 
 }

@@ -25,5 +25,17 @@ public class Room{
         return name;
     }
 
+    public void execute(Action action) {
+        if (action.checkArgs(Light.class)) {
+            for (Light light : lights) {
+                action.run(light);
+            }
+        }
+        if (action.checkArgs(Door.class)) {
+            for (Door door : doors) {
+                action.run(door);
+            }
+        }
+    }
 
 }

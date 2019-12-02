@@ -13,7 +13,6 @@ public class Door implements Actionable{
         return id;
     }
 
-    @Override
     public void setStatus(boolean status) {
         this.isOpen = isOpen();
     }
@@ -35,4 +34,9 @@ public class Door implements Actionable{
     }
 
 
+    @Override
+    public void execute(Action action) {
+
+    }
+}
 }
