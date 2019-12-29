@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import ru.sbt.mipt.oop.objects.Door;
 import ru.sbt.mipt.oop.objects.Room;
 import ru.sbt.mipt.oop.objects.SmartHome;
-import ru.sbt.mipt.oop.processors.DoorEventProcessor;
 import ru.sbt.mipt.oop.sensors.SensorEvent;
 import ru.sbt.mipt.oop.sensors.SensorEventType;
 
@@ -16,40 +15,36 @@ class DoorEventProcessorTest {
 
     @Test
     void processEventCorrectDoorOpen() {
-        SmartHome home =new SmartHome();
-        String doorId1 = "125";
-        Door door1 = new Door(true, doorId1);
-        String doorId2 = "15";
-        Door door2 = new Door(false, doorId2);
+        SmartHome home = new SmartHome();
+        Door door1 = new Door("door125", true);
+        Door door2 = new Door("door15", false);
         home.addRoom(new Room(Collections.emptyList(), Arrays.asList(door1), "room1"));
         home.addRoom(new Room(Collections.emptyList(), Arrays.asList(door2), "room2"));
 
-        SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_OPEN, doorId1);
-        SensorEvent event2 = new SensorEvent(SensorEventType.DOOR_OPEN, doorId2);
-        DoorEventProcessor doorEventProcessor1 = new DoorEventProcessor(home, event1);
-        DoorEventProcessor doorEventProcessor2 = new DoorEventProcessor(home, event2);
-        doorEventProcessor1.processEvent();
-        doorEventProcessor2.processEvent();
+        SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_OPEN, door1.getId());
+        SensorEvent event2 = new SensorEvent(SensorEventType.DOOR_OPEN, door2.getId());
+        DoorEventProcessor doorEventProcessor1 = new DoorEventProcessor(home);
+        DoorEventProcessor doorEventProcessor2 = new DoorEventProcessor(home);
+        doorEventProcessor1.processEvent(event1);
+        doorEventProcessor2.processEvent(event2);
         Assert.assertTrue(door1.isOpen());
         Assert.assertTrue(door2.isOpen());
     }
 
     @Test
     void processEventCorrectDoorClose() {
-        SmartHome home =new SmartHome();
-        String doorId1 = "125";
-        Door door1 = new Door(true, doorId1);
-        String doorId2 = "15";
-        Door door2 = new Door(false, doorId2);
+        SmartHome home = new SmartHome();
+        Door door1 = new Door("door125", true);
+        Door door2 = new Door("door15", false);
         home.addRoom(new Room(Collections.emptyList(), Arrays.asList(door1), "room1"));
         home.addRoom(new Room(Collections.emptyList(), Arrays.asList(door2), "room2"));
 
-        SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_CLOSED, doorId1);
-        SensorEvent event2 = new SensorEvent(SensorEventType.DOOR_CLOSED, doorId2);
-        DoorEventProcessor doorEventProcessor1 = new DoorEventProcessor(home, event1);
-        DoorEventProcessor doorEventProcessor2 = new DoorEventProcessor(home, event2);
-        doorEventProcessor1.processEvent();
-        doorEventProcessor2.processEvent();
+        SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_CLOSED, door1.getId());
+        SensorEvent event2 = new SensorEvent(SensorEventType.DOOR_CLOSED, door2.getId());
+        DoorEventProcessor doorEventProcessor1 = new DoorEventProcessor(home);
+        DoorEventProcessor doorEventProcessor2 = new DoorEventProcessor(home);
+        doorEventProcessor1.processEvent(event1);
+        doorEventProcessor2.processEvent(event2);
         Assert.assertTrue(!door1.isOpen());
         Assert.assertTrue(!door2.isOpen());
     }

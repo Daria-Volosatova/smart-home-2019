@@ -8,21 +8,26 @@ import static ru.sbt.mipt.oop.sensors.SensorEventType.ALARM_ACTIVATE;
 import static ru.sbt.mipt.oop.sensors.SensorEventType.ALARM_DEACTIVATE;
 
 public class AlarmEventProcessor implements EventProcessor {
+    private SmartHome smartHome;
 
-    public void processEvent(SmartHome smartHome, SensorEvent event) {
-        if (isAlarmEvent(event)){
-            Alarm alarm = SmartHome.getAlarm();
-            if (event.getType() == ALARM_ACTIVATE){
-                String currentCode = Alarm.getCode();
-                alarm.activateAlarm(currentCode);
-            } else {
-                String currentCode = Alarm.getCode();
-                alarm.deactivateAlarm(currentCode);
-            }
-        }
-    }
+    public AlarmEventProcessor(SmartHome smartHome){ this.smartHome = smartHome;}
+
 
     public boolean isAlarmEvent(SensorEvent event){
         return (event.getType() == ALARM_ACTIVATE || event.getType() == ALARM_DEACTIVATE);
+    }
+
+    @Override
+    public void processEvent(SensorEvent event) {
+        if (isAlarmEvent(event)){
+            Alarm alarm = smartHome.getAlarm();
+            if (event.getType() == ALARM_ACTIVATE){
+                String currentCode = alarm.getCode();
+                alarm.activateAlarm(currentCode);
+            } else {
+                String currentCode = alarm.getCode();
+                alarm.deactivateAlarm(currentCode);
+            }
+        }
     }
 }

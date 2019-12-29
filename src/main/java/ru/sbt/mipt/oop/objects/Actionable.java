@@ -1,7 +1,7 @@
 package ru.sbt.mipt.oop.objects;
 
-public interface Actionable {
-    String getId();
+import ru.sbt.mipt.oop.Action;
 
-    void setStatus(boolean status);
+public interface Actionable {
+    boolean execute(Action action);
 }

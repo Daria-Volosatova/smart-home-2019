@@ -1,9 +1,8 @@
 package ru.sbt.mipt.oop.objects.alarm;
 
-public class AlarmActivatedState implements AlarmState{
+public class AlarmActivatedState implements AlarmState {
     private Alarm alarm;
     private String code;
-    private AlarmState state;
 
     public AlarmActivatedState(Alarm alarm, String code){
         this.alarm = alarm;
@@ -40,6 +39,6 @@ public class AlarmActivatedState implements AlarmState{
 
     @Override
     public void activateAlert() {
-        alarm.getState();
+        alarm.changeState(new AlarmAlertState(alarm));
     }
 }
