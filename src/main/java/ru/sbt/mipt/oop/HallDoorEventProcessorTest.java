@@ -6,48 +6,39 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class HallDoorEventProcessorTest {
 
     @Test
     void processEventAllLightOff() {
-        SmartHome home =new SmartHome();
-        String doorId1 = "125";
-        Door door1 = new Door(true, doorId1);
-        String lightId1 = "125";
-        Light light1 = new Light(lightId1, true);
-        String lightId2 = "3";
-        Light light2 = new Light(lightId2, true);
+        SmartHome home = new SmartHome();
+        Door door1 = new Door("door125", true);
+        Light light1 = new Light("light125", true);
+        Light light2 = new Light("light3", true);
         home.addRoom(new Room(Arrays.asList(light1), Arrays.asList(door1), "hall"));
         home.addRoom(new Room(Arrays.asList(light2),  Collections.emptyList(), "room2"));
 
-        SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_CLOSED, doorId1);
-        HallDoorEventProcessor hallDoorEventProcessor = new HallDoorEventProcessor(home, event1);
-        hallDoorEventProcessor.processEvent();
-        Assert.assertTrue(!light1.isOn());
-        Assert.assertTrue(!light2.isOn());
-        Assert.assertTrue(!door1.isOpen());
+        SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_CLOSED, door1.getId());
+        HallDoorEventProcessor hallDoorEventProcessor = new HallDoorEventProcessor(home);
+        hallDoorEventProcessor.processEvent(event1);
+        Assert.assertFalse(light1.isOn());
+        Assert.assertFalse(light2.isOn());
+        Assert.assertFalse(door1.isOpen());
     }
 
     @Test
     void processEventLightOffWhenDoorOpening() {
-        SmartHome home =new SmartHome();
-        String doorId1 = "125";
-        Door door1 = new Door(false, doorId1);
-        String lightId1 = "125";
-        Light light1 = new Light(lightId1, false);
-        String lightId2 = "3";
-        Light light2 = new Light(lightId2, false);
+        SmartHome home = new SmartHome();
+        Door door1 = new Door("door125", true);
+        Light light1 = new Light("light125", true);
+        Light light2 = new Light("light3", true);
         home.addRoom(new Room(Arrays.asList(light1), Arrays.asList(door1), "hall"));
         home.addRoom(new Room(Arrays.asList(light2),  Collections.emptyList(), "room2"));
 
-        SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_OPEN, doorId1);
-        HallDoorEventProcessor hallDoorEventProcessor1 = new HallDoorEventProcessor(home, event1);
-        hallDoorEventProcessor1.processEvent();
-        Assert.assertTrue(!light1.isOn());
-        Assert.assertTrue(!light2.isOn());
+        SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_OPEN, door1.getId());
+        HallDoorEventProcessor hallDoorEventProcessor1 = new HallDoorEventProcessor(home);
+        hallDoorEventProcessor1.processEvent(event1);
+        Assert.assertTrue(light1.isOn());
+        Assert.assertTrue(light2.isOn());
         Assert.assertTrue(door1.isOpen());
     }
-
 }

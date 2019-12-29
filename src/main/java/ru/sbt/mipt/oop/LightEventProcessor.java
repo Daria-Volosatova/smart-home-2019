@@ -14,11 +14,14 @@ public class LightEventProcessor implements EventProcessor{
     // событие от источника света
     @Override
     public void processEvent(SensorEvent event) {
-        if (!isLightEvent(event)){return;}
+        if (!isLightEvent(event)){
+            return;
+        }
         // событие от источника света
-        smartHome.execute(actionable -> {
-            Light light = (Light) actionable;
-            if (light.getId().equals(event.getObjectId())) {
+        smartHome.execute((Actionable actionable) -> {
+            if (actionable instanceof Light) {
+                Light light = (Light) actionable;
+                if (light.getId().equals(event.getObjectId())) {
                     if (event.getType() == LIGHT_ON) {
                         light.setOn(true);
                         System.out.println("Light " + light.getId() + " was turned on.");
@@ -26,7 +29,10 @@ public class LightEventProcessor implements EventProcessor{
                         light.setOn(false);
                         System.out.println("Light " + light.getId() + " was turned off.");
                     }
+                    return true;
                 }
+            }
+            return false;
         });
     }
 

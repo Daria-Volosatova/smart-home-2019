@@ -1,7 +1,5 @@
 package ru.sbt.mipt.oop;
 
-public interface Action <T> {
-    public boolean checkArgs(Class arg);
-    public void run(T arg);
-    void executeObj(Object obj);
+public interface Action {
+    boolean execute(Actionable actionable);
 }
